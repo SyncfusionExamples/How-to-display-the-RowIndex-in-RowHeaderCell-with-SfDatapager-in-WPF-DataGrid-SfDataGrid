@@ -1,7 +1,7 @@
-﻿<Application x:Class="DisplayRowIndexinRowheadercell.App"
+﻿<Application x:Class="DisplayRowIndexInGridRowHeaderCell.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DisplayRowIndexinRowheadercell"
+             xmlns:local="clr-namespace:DisplayRowIndexInGridRowHeaderCell"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
