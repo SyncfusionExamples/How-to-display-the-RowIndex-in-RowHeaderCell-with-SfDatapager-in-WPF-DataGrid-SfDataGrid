@@ -1,14 +1,11 @@
 # How to to display the RowIndex in GridRowHeaderCell when combined with SfDatapager in WPF DataGrid
 
-You can display the row index value in the RowHeaderCell by customizing its style with the binding of **RowIndex** to the **TextBlock**.**Text** property, as shown in the link below: 
+Your requirement is to display row numbers in the GridRowHeaderCell. This functionality can be achieved by customizing the RowHeaderCell style with the binding of RowIndex to the TextBlock.Text property then using a MultiValueConverter and handling the PageIndexChanged event in SfDataPager, as demonstrated below:
 
-[Display RowIndex at RowHeaderCell](https://support.syncfusion.com/kb/article/5182/how-to-display-rowindex-at-rowheadercell-in-sfdatagrid-in-wpf-)
+ 
+ ```C#
 
-Currently, we do not have direct support to display the number of data in the GridRowHeaderCell when combined with SfDataPager. However, you can achieve this functionality by using a MultivalueConverter and handling the PageIndexChanged event in SfDataPager, as demonstrated below:
-
- ```C# 
-
-        private void SfDataPager_PageIndexChanged(object sender, PageIndexChangedEventArgs e)
+ private void SfDataPager_PageIndexChanged(object sender, PageIndexChangedEventArgs e)
         {
             for (int i = 1; i &lt; dataGrid.RowGenerator.Items.Count; i++)
             {
@@ -17,11 +14,11 @@ Currently, we do not have direct support to display the number of data in the Gr
             }
         }
     
- ``` 
+ ```
 
  ```C#
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+ public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             var dataPager = values[2] as SfDataPager;
             
@@ -38,8 +35,6 @@ Currently, we do not have direct support to display the number of data in the Gr
  ```
 
 The index is displayed in RowHeaderCell based on the above customized style like below,
-![Shows the RowIndex](DisplayRowIndex.png)
-
-![Shows the secondpage RowIndex](SecondPageDisplayRowIndex.png)
+ ![Shows the DisplayRowIndexInGridRowHeaderCell image](DisplayRowIndexInGridRowHeaderCell.gif)
 
 Take a moment to peruse the   [WPF DataGrid - Row Header](https://help.syncfusion.com/wpf/datagrid/rows#row-header) documentation, to learn more about Row Header code examples.
