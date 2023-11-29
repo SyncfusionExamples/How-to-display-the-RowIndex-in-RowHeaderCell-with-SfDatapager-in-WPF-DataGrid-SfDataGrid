@@ -68,6 +68,6 @@ You can display row numbers in the GridRowHeaderCell by customizing the RowHeade
  ```
 
 The index is displayed in RowHeaderCell based on the above customized style like below,
- ![Shows the DisplayRowIndexInGridRowHeaderCell image](DisplayRowIndexInGridRowHeaderCell.gif)
+ ![Shows the DisplayRowIndexInGridRowHeaderCell image](GridRowHeaderCellImage.gif)
 
 Take a moment to peruse the   [WPF DataGrid - Row Header](https://help.syncfusion.com/wpf/datagrid/rows#row-header) documentation, to learn more about Row Header code examples.
