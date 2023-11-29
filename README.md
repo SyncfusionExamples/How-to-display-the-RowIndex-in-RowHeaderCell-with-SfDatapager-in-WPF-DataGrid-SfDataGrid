@@ -1,36 +1,69 @@
 # How to to display the RowIndex in GridRowHeaderCell when combined with SfDatapager in WPF DataGrid
 
-Your requirement is to display row numbers in the GridRowHeaderCell. This functionality can be achieved by customizing the RowHeaderCell style with the binding of RowIndex to the TextBlock.Text property then using a MultiValueConverter and handling the PageIndexChanged event in SfDataPager, as demonstrated below:
+You can display row numbers in the GridRowHeaderCell by customizing the RowHeaderCell style. This can be achieved by binding the RowIndex to the TextBlock.Text property and using a MultiValueConverter. Additionally, you can handle the PageIndexChanged event in SfDataPager. This is demonstrated below.
+
+
+ ```XML
+<Style TargetType="syncfusion:GridRowHeaderCell">
+    <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="syncfusion:GridRowHeaderCell">
+                <Border x:Name="PART_RowHeaderCellBorder"
+                        Background="Blue"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <Grid>
+                        <!--//RowIndex is displayed here-->
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"       
+                                   Foreground="White"                                   
+                                   TextAlignment="Center"   >
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource rowIndexConverter}" >
+                                    <Binding  Path="RowIndex" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                    <Binding ElementName="dataGrid"  />
+                                    <Binding ElementName="dataPager" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+</Style>
+
+ ```
 
  
  ```C#
 
- private void SfDataPager_PageIndexChanged(object sender, PageIndexChangedEventArgs e)
-        {
-            for (int i = 1; i &lt; dataGrid.RowGenerator.Items.Count; i++)
-            {
-                var rowHeaderCell = ((dataGrid.RowGenerator.Items[i] as DataRow).VisibleColumns[0] as DataColumn).ColumnElement;
-                (rowHeaderCell as GridRowHeaderCell).RowIndex = -1;
-            }
-        }
+  private void OnPageIndexChanged(object sender, PageIndexChangedEventArgs e)
+  {
+    for (int i = 1; i < dataGrid.RowGenerator.Items.Count; i++)
+    {
+        var rowHeaderCell = ((dataGrid.RowGenerator.Items[i] as DataRow).VisibleColumns[0] as DataColumn).ColumnElement;
+        (rowHeaderCell as GridRowHeaderCell).RowIndex = -1;
+    }
+  }
+
     
  ```
 
  ```C#
 
- public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var dataPager = values[2] as SfDataPager;
-            
-            if (dataPager.PageIndex == 0 || (int)values[0] == -1)
-            {
-                return values[0].ToString();
-            }
-           
-                values[0] = (int)values[0] + (((dataPager.PageIndex + 1) - 1) * dataPager.PageSize);
-                return values[0].ToString();
-          
-        }
+  public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+  {
+    var dataPager = values[2] as SfDataPager;
+
+    if (dataPager.PageIndex == 0 || (int)values[0] == -1)
+    {
+        return values[0].ToString();
+    }
+
+    values[0] = (int)values[0] + (((dataPager.PageIndex + 1) - 1) * dataPager.PageSize);
+    return values[0].ToString();
+  }
        
  ```
 
