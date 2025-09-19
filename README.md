@@ -1,7 +1,6 @@
-# How to to display the RowIndex in GridRowHeaderCell when combined with SfDatapager in WPF DataGrid
+# How to display the RowIndex in GridRowHeaderCell when combined with SfDatapager in WPF DataGrid?
 
-You can display row numbers in the GridRowHeaderCell by customizing the RowHeaderCell style. This can be achieved by binding the RowIndex to the TextBlock.Text property and using a MultiValueConverter. Additionally, you can handle the PageIndexChanged event in SfDataPager. This is demonstrated below.
-
+You can display row numbers in the [GridRowHeaderCell](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.Grid.GridRowHeaderCell.html) by customizing the `GridRowHeaderCell` style. This can be achieved by binding the `RowIndex` to the `TextBlock.Text` property and using a MultiValueConverter. Additionally, you can handle the PageIndexChanged event in `SfDataPager`. 
 
  ```XML
 <Style TargetType="syncfusion:GridRowHeaderCell">
@@ -13,7 +12,7 @@ You can display row numbers in the GridRowHeaderCell by customizing the RowHeade
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                     <Grid>
-                        <!--//RowIndex is displayed here-->
+                        <!--RowIndex is displayed here-->
                         <TextBlock HorizontalAlignment="Center"
                                    VerticalAlignment="Center"       
                                    Foreground="White"                                   
@@ -67,7 +66,7 @@ You can display row numbers in the GridRowHeaderCell by customizing the RowHeade
        
  ```
 
-The index is displayed in RowHeaderCell based on the above customized style like below,
+The index is displayed in `GridRowHeaderCell` based on the above customized style like below,
  ![Shows the DisplayRowIndexInGridRowHeaderCell image](GridRowHeaderCellImage.gif)
 
 Take a moment to peruse the   [WPF DataGrid - Row Header](https://help.syncfusion.com/wpf/datagrid/rows#row-header) documentation, to learn more about Row Header code examples.
